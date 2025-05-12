@@ -25,7 +25,16 @@ kafka_java_heap: "-Xms1G -Xmx1G"
 kafka_background_threads: 10
 
 kafka_listeners:
-  - "PLAINTEXT://:9092"
+  - "PLAINTEXT://0.0.0.0:9092"
+# Hostname and port the broker will advertise to producers and consumers. If not set,
+# it uses the value for "listeners" if configured.  Otherwise, it will use the value
+# returned from java.net.InetAddress.getCanonicalHostName().
+#advertised.listeners=PLAINTEXT://your.host.name:9092
+kafka_advertised_listeners:
+  # - "SASL_SSL://:9094"
+  - "PLAINTEXT://{{ ansible_host }}:9092"
+
+# The number of threads handling network requests
 
 kafka_num_network_threads: 3
 kafka_num_io_threads: 8
