@@ -292,6 +292,20 @@
 
 # Run connect-standalone.sh as a system service
 
+- name: Template connect-standalone systemd service
+  ansible.builtin.template:
+    src: connect-standalone.service.j2
+    dest: /etc/systemd/system/connect-standalone.service
+    group: '{{ kafka_group }}'
+    owner: '{{ kafka_user }}'
+    mode: "0644"
+  notify:
+    - Reload initd
+    - Restart kafka-connect-standalone systemd
+  when: ansible_os_family == "RedHat" and ansible_distribution_major_version > '6' or ansible_os_family == "Debian"
+  tags:
+    - kafka_connect_service
+
 - name: Install and start the kafka-connect-standalone service
   ansible.builtin.service:
     name: connect-standalone
@@ -300,4 +314,6 @@
   when: kafka_connect_standalone_start
   tags:
     - kafka_connect_service
+
+
 

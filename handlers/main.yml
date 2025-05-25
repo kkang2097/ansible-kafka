@@ -1,5 +1,0 @@
-- name: Restart kafka-connect-standalone systemd
-  ansible.builtin.systemd:
-    name: kafka-connect-standalone
-    state: restarted
-    daemon_reload: true 
