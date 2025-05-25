@@ -289,3 +289,15 @@
     state: absent
   tags:
     - kafka_cleanup
+
+# Run connect-standalone.sh as a system service
+
+- name: Install and start the kafka-connect-standalone service
+  ansible.builtin.service:
+    name: connect-standalone
+    state: started
+    enabled: true
+  when: kafka_connect_standalone_start
+  tags:
+    - kafka_connect_service
+

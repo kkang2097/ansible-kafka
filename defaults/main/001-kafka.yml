@@ -17,6 +17,7 @@ kafka_log_dir: /var/log/kafka
 
 kafka_start: true
 kafka_restart: true
+kafka_connect_standalone_start: true
 
 ############################# Server #############################
 kafka_broker_id: 0

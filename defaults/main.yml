@@ -1,0 +1,3 @@
+# Kafka Connect Standalone Service
+kafka_connect_standalone_start: true
+kafka_connect_standalone_heap_opts: "-Xmx1G -Xms1G" 

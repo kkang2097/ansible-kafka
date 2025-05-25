@@ -1,0 +1,16 @@
+[Unit]
+Description=Kafka Connect Standalone Service
+After=network.target kafka.service
+
+[Service]
+Type=simple
+User={{ kafka_user }}
+Group={{ kafka_group }}
+Environment="KAFKA_HEAP_OPTS={{ kafka_connect_standalone_heap_opts }}"
+ExecStart={{ kafka_dir }}/bin/connect-standalone.sh {{ kafka_dir }}/config/connect-standalone.properties
+ExecStop=/bin/kill -s TERM $MAINPID
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target 
